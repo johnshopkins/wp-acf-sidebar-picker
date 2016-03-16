@@ -32,13 +32,14 @@ class Field extends \acf_field
     }
 
     $sidebar["inherit"] = "Inherit Parent Sidebar";
+    $sidebar[""] = "None";
 
     return $sidebar;
   }
 
   public function render_field($field)
   {
-    $value = $field["value"] ? $field["value"] : "inherit";
+    $value = $field["value"] ? $field["value"] : "";
 
     echo "<div class='acf-input-wrap'>";
     echo '<select id="' . $field['id'] . '" class="' . $field['class'] . '" name="' . $field['name'] . '" >';
