@@ -6,7 +6,7 @@ class Field extends \acf_field
 {
   public $defaults;
 
-  public function __construct($logger)
+  public function __construct()
   {
     $this->name = 'sidebar_picker';
     $this->label = __('Sidebar Picker');
