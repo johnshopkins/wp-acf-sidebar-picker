@@ -3,10 +3,5 @@
   "type": "wordpress-plugin",
   "description": "",
   "license": "MIT",
-  "homepage": "http://github.com/johnshopkins/wp-acf-sidebar-picker",
-  "autoload": {
-    "psr-4" : {
-      "SidebarPicker\\" : ["src/"]
-    }
-  }
+  "homepage": "http://github.com/johnshopkins/wp-acf-sidebar-picker"
 }
