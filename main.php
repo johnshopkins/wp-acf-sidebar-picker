@@ -3,7 +3,7 @@
 Plugin Name: Sidebar Picker
 Description: Adds the ability to choose a sidebar item or default to the inherited page's related content item.
 Author: Jen Wachter
-Version: 0.3
+Version: 0.4
 */
 
 // exit if accessed directly
@@ -28,6 +28,49 @@ class SidebarPickerField extends acf_field
     );
 
     parent::__construct();
+  }
+
+  public function load_value($value, $post_id, $field)
+  {
+    if (empty($value)) {
+      return null;
+    }
+
+    if ($value == "inherit") {
+      $value = $this->findParentSidebar($post_id, $field['name']);
+    }
+
+    return $value;
+  }
+
+  /**
+   * Find inherited sidebar
+   * @param  integer $id        Post ID
+   * @param  string  $fieldName Fieldname of sidebar picker
+   * @return integer     Sidebar content post ID
+   */
+  protected function findParentSidebar($id, $fieldName)
+  {
+    // set to null until a parent (if there is one) is found
+    $sidebar = null;
+
+    // traverse up page's ancestors to find a page with a set sidebar
+    while ($parent = wp_get_post_parent_id($id)) {
+
+
+      // how do i know what the fieldname is???
+      $value = get_post_meta($parent, $fieldName, true);
+
+      if ($value != "inherit") {
+        $sidebar = $value;
+        break;
+      }
+
+      // set parent ID as current to continue up the three
+      $id = $parent;
+    }
+
+    return $sidebar;
   }
 
   protected function getSidebarGroups()
