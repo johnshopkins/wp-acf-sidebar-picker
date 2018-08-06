@@ -77,7 +77,9 @@ class SidebarPickerField extends acf_field
   {
     $posts = get_posts(array(
       "post_type" => "sidebar",
-      "posts_per_page" => -1
+      "posts_per_page" => -1,
+      "orderby" => "title",
+      "order" => "ASC"
     ));
 
     $sidebar = array();
